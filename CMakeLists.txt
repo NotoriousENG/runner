@@ -7,6 +7,11 @@ project ("Runner")
 
 set(NO_TESTS ON)
 
+option(SHIP_IT "Ship the game" OFF)
+if (SHIP_IT)
+    add_definitions(-DSHIP_IT)
+endif()
+
 if( ${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
     add_compile_definitions("EMSCRIPTEN")
     

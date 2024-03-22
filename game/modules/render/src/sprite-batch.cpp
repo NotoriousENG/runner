@@ -3,11 +3,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-SpriteBatch::SpriteBatch(glm::vec2 windowSize) {
-  this->vertexShader.LoadFromFile("assets/shaders/sprite.vert",
-                                  GL_VERTEX_SHADER);
-  this->fragmentShader.LoadFromFile("assets/shaders/sprite.frag",
-                                    GL_FRAGMENT_SHADER);
+SpriteBatch::SpriteBatch(glm::vec2 windowSize, const char *vertexShaderPath,
+                         const char *fragmentShaderPath) {
+  this->vertexShader.LoadFromFile(vertexShaderPath, GL_VERTEX_SHADER);
+  this->fragmentShader.LoadFromFile(fragmentShaderPath, GL_FRAGMENT_SHADER);
 
   this->shaderProgram = glCreateProgram();
 

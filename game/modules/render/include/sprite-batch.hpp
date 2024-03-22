@@ -18,7 +18,8 @@ struct Vertex {
 
 class SpriteBatch {
 public:
-  SpriteBatch(glm::vec2 windowSize);
+  SpriteBatch(glm::vec2 windowSize, const char *vertexShaderPath,
+              const char *fragmentShaderPath);
   ~SpriteBatch();
 
   void UpdateCamera(glm::vec2 focalPoint, SDL_Rect tilemapBounds);

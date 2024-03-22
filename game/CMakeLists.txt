@@ -12,8 +12,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 SET(USE_SYSTEM_JSON ON CACHE BOOL "Use system Nlohmann JSON")
 SET(NO_EXAMPLES ON CACHE BOOL "Disable examples")
 
-option(COPY_GAME_ASSETS "Copy assets to build directory" ON) # when prototyping, set to OFF
-
 if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
     # if CLANG/ GCC use GNU99 (This ensures that aflecs ddons that rely on time & socket functions are compiled correctly.)
     if (CMAKE_C_COMPILER_ID MATCHES "Clang" OR CMAKE_C_COMPILER_ID MATCHES "GNU")
@@ -83,7 +81,7 @@ else()
     set(FINAL_BINARY_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 endif()
 
-if (COPY_GAME_ASSETS)
+if (SHIP_IT OR EMSCRIPTEN)
   # copy assets to the build directory
   if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
     add_custom_target(copy_assets

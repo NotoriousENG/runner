@@ -3,11 +3,11 @@
 #include <SDL.h>
 #include <glm/gtc/type_ptr.hpp>
 
-MeshRenderer::MeshRenderer() {
+MeshRenderer::MeshRenderer(const char *vertexShaderPath,
+                           const char *fragmentShaderPath) {
 
-  this->vertexShader.LoadFromFile("assets/shaders/mesh.vert", GL_VERTEX_SHADER);
-  this->fragmentShader.LoadFromFile("assets/shaders/mesh.frag",
-                                    GL_FRAGMENT_SHADER);
+  this->vertexShader.LoadFromFile(vertexShaderPath, GL_VERTEX_SHADER);
+  this->fragmentShader.LoadFromFile(fragmentShaderPath, GL_FRAGMENT_SHADER);
 
   this->shaderProgram = glCreateProgram();
 

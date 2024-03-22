@@ -52,9 +52,11 @@ int Game::init(SharedData *shared_data) {
   // Get current window size
   int w, h;
   SDL_GetWindowSize(SDL_GL_GetCurrentWindow(), &w, &h);
-  this->spriteBatcher = std::make_unique<SpriteBatch>(glm::vec2(w, h));
+  this->spriteBatcher = std::make_unique<SpriteBatch>(
+      glm::vec2(w, h), RES_SHADER_SPRITE_VERT, RES_SHADER_SPRITE_FRAG);
 
-  this->meshRenderer = std::make_unique<MeshRenderer>();
+  this->meshRenderer = std::make_unique<MeshRenderer>(RES_SHADER_MODEL_VERT,
+                                                      RES_SHADER_MODEL_FRAG);
 
   this->mixer = std::make_unique<Mixer>();
 

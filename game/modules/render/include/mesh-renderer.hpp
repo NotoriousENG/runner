@@ -8,7 +8,7 @@
 
 class MeshRenderer {
 public:
-  MeshRenderer();
+  MeshRenderer(const char *vertexShaderPath, const char *fragmentShaderPath);
 
   void DrawMesh(Mesh *mesh, glm::mat4 model);
 
