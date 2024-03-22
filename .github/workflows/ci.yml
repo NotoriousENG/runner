@@ -50,37 +50,38 @@ jobs:
       - name: Create Artifact
         run: |
           mkdir release
-          cp build/Turboballs.html release/index.html
-          cp build/Turboballs.js release/Turboballs.js
-          cp build/Turboballs.wasm release/Turboballs.wasm
-          cp build/Turboballs.data release/Turboballs.data
+          cp build/Runner.html release/index.html
+          cp build/Runner.js release/Runner.js
+          cp build/Runner.wasm release/Runner.wasm
+          cp build/Runner.data release/Runner.data
           cp -r assets release/assets
           python3 scripts/optimize_build_assets.py release/assets
 
-      - name: Publish Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: web-release
-          path: release
+      # publish the artifact once the page is made
+      # - name: Publish Artifact
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: web-release
+      #     path: release
 
-      - name: Install Butler
-        run: |
-          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
-          unzip butler.zip
-          chmod +x butler
-          ./butler -V
+      # - name: Install Butler
+      #   run: |
+      #     curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+      #     unzip butler.zip
+      #     chmod +x butler
+      #     ./butler -V
 
-      - name: Create release zip and run Butler
+      # - name: Create release zip and run Butler
 
-        # Here we say that we will use the BUTLER_API_KEY as an environment variable
-        env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-        run: |
-          cd release
-          zip -r ../web.zip *
-          cd ..
+      #   # Here we say that we will use the BUTLER_API_KEY as an environment variable
+      #   env:
+      #     BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+      #   run: |
+      #     cd release
+      #     zip -r ../web.zip *
+      #     cd ..
 
-          # Butler will read the API key from the environment variable
-          ./butler login
-          ./butler push web.zip NotoriousENG/turboballs:html5
-          ./butler logout
+      #     # Butler will read the API key from the environment variable
+      #     ./butler login
+      #     ./butler push web.zip NotoriousENG/turboballs:html5
+      #     ./butler logout
